@@ -12,6 +12,7 @@ CI/CD Database Web Application
 | Directory | Description
 | --- | ---
 | .github | Github actions
+| buildinfo | Buildinfo Django app
 | githooks | Git hook scripts
 | orthus | Main Django project directory
 | LICENSES | Licenses used in this repository
