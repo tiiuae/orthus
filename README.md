@@ -13,6 +13,7 @@ CI/CD Database Web Application
 | --- | ---
 | .github | Github actions
 | githooks | Git hook scripts
+| orthus | Main Django project directory
 | LICENSES | Licenses used in this repository
 
 ## Git commit hook
