@@ -5,7 +5,7 @@
 
 # Orthus
 
-CI/CD Web Server
+CI/CD Database Web Application
 
 ## Directories
 
