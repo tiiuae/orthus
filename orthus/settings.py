@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'buildinfo',
+    'accounts',
 ]
 
 if DEBUG:
@@ -132,6 +133,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Specify custom user model
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # The debug toolbar is shown only if the IP is present in the INTERNAL_IPS list
 INTERNAL_IPS = [
