@@ -1,0 +1,9 @@
+-- SPDX-FileCopyrightText: 2023 Technology Innovation Institute (TII)
+-- SPDX-License-Identifier: Apache-2.0
+
+-- This should drop everything related to orthus from server: 'sudo -u postgres psql < lose_everything.psql
+-- Obviously this DELETES DATA WITHOUT A WARNING, so don't do it unless you know what you're doing!
+
+DROP DATABASE orthus;
+DROP USER orthus;
+\q

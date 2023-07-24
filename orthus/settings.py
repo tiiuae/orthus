@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'orthus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'orthus',
+        'USER': 'orthus',
+        'PASSWORD': '_Hydr4s_5ibl1ngs_',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

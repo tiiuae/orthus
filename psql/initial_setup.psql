@@ -1,0 +1,13 @@
+-- SPDX-FileCopyrightText: 2023 Technology Innovation Institute (TII)
+-- SPDX-License-Identifier: Apache-2.0
+
+-- Something like this should be run after postgres installation: 'sudo -u postgres psql < initial_setup.psql'
+-- Obviously this is for development only, as it contains a password!
+
+CREATE DATABASE orthus;
+CREATE USER orthus WITH ENCRYPTED PASSWORD '_Hydr4s_5ibl1ngs_';
+ALTER ROLE orthus SET client_encoding TO 'utf8';
+ALTER ROLE orthus SET default_transaction_isolation TO 'read committed';
+ALTER ROLE orthus SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE orthus TO orthus;
+\q
