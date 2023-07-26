@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023 Technology Innovation Institute (TII)
+# SPDX-License-Identifier: Apache-2.0
+
 """
 URL configuration for orthus project.
 
@@ -14,6 +17,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -26,5 +31,11 @@ urlpatterns = [
 
 if settings.DEBUG:
     import debug_toolbar
+
+    # Insert debug toolbar as first in urlpatterns
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls))] + urlpatterns
+
+    # Only in development our files shall reside under the project directory
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
