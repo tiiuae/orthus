@@ -6,7 +6,7 @@ from django.db import models
 
 class BuildServer(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    description = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -18,20 +18,21 @@ class BuildServer(models.Model):
 class BuildInfo(models.Model):
     build_server = models.ForeignKey(
         BuildServer, on_delete=models.PROTECT, related_name='build_infos')
-    project = models.CharField(max_length=255, null=True)
-    jobset = models.CharField(max_length=255, null=True)
-    job = models.CharField(max_length=255, null=True)
+    project = models.CharField(max_length=255, null=True, blank=True)
+    jobset = models.CharField(max_length=255, null=True, blank=True)
+    job = models.CharField(max_length=255, null=True, blank=True)
     build_id = models.IntegerField()
-    system = models.CharField(max_length=255, null=True)
-    nix_name = models.CharField(max_length=255, null=True)
-    queued_at = models.DateTimeField(null=True)
-    build_started = models.DateTimeField(null=True)
-    build_finished = models.DateTimeField(null=True)
-    post_processing_done = models.DateTimeField(null=True)
+    system = models.CharField(max_length=255, null=True, blank=True)
+    nix_name = models.CharField(max_length=255, null=True, blank=True)
+    queued_at = models.DateTimeField(null=True, blank=True)
+    build_started = models.DateTimeField(null=True, blank=True)
+    build_finished = models.DateTimeField(null=True, blank=True)
+    post_processing_done = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
-    derivation_store_path = models.CharField(max_length=255, null=True)
-    closure_size = models.FloatField(null=True)
-    output_size = models.FloatField(null=True)
+    derivation_store_path = models.CharField(
+        max_length=255, null=True, blank=True)
+    closure_size = models.FloatField(null=True, blank=True)
+    output_size = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.build_server.name}-{self.build_id}'
