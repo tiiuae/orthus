@@ -150,3 +150,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+}

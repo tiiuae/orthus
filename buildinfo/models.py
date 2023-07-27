@@ -6,7 +6,13 @@ from django.db import models
 
 class BuildServer(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    description = models.TextField(null=True)
+    description = models.CharField(max_length=255, null=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+    class Meta:
+        ordering = ['name']
 
 
 class BuildInfo(models.Model):
@@ -22,10 +28,16 @@ class BuildInfo(models.Model):
     build_started = models.DateTimeField(null=True)
     build_finished = models.DateTimeField(null=True)
     post_processing_done = models.DateTimeField(null=True)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     derivation_store_path = models.CharField(max_length=255, null=True)
     closure_size = models.FloatField(null=True)
     output_size = models.FloatField(null=True)
+
+    def __str__(self) -> str:
+        return f'{self.build_server.name}-{self.build_id}'
+
+    class Meta:
+        ordering = ['build_server__name', 'build_id']
 
 
 class OutputStorePath(models.Model):
@@ -33,9 +45,15 @@ class OutputStorePath(models.Model):
         BuildInfo, on_delete=models.CASCADE, related_name='output_store_paths')
     path = models.CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return self.path
+
+    class Meta:
+        ordering = ['path']
+
 
 def files_directory(instance, filename):
-    return f"{instance.build_info.build_server.name}/{instance.build_info.build_id}/{filename}"
+    return f"{instance.buildinfo.build_server.name}/{instance.buildinfo.build_id}/{filename}"
 
 
 class Downloadable(models.Model):
@@ -55,8 +73,11 @@ class Downloadable(models.Model):
                   (FILE_TYPE_VULNSCAN, 'Vulnerability Scan'),
                   (FILE_TYPE_OTHER, 'Other')]
 
-    build_info = models.ForeignKey(
+    buildinfo = models.ForeignKey(
         BuildInfo, on_delete=models.CASCADE, related_name='downloadables')
     file_type = models.CharField(
         max_length=2, choices=FILE_TYPES, default=FILE_TYPE_OTHER)
     file_name = models.FileField(upload_to=files_directory)
+
+    def __str__(self) -> str:
+        return str(self.file_name)
