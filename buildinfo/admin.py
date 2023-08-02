@@ -19,7 +19,7 @@ class BuildServerAdmin(admin.ModelAdmin):
 
 @admin.register(models.BuildInfo)
 class BuildInfoAdmin(admin.ModelAdmin):
-    list_display = ['build_server', 'build_id', 'job',
+    list_display = ['build_server', 'build', 'job',
                     'output_paths_count', 'downloadables_count']
     list_select_related = ['build_server']
 

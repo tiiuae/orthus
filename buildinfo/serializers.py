@@ -26,7 +26,7 @@ class DownloadableSerializer(serializers.ModelSerializer):
 class BuildinfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildInfo
-        fields = ['id', 'created', 'project', 'jobset', 'job', 'build_id',
+        fields = ['id', 'created', 'project', 'jobset', 'job', 'build',
                   'system', 'nix_name', 'queued_at', 'build_started',
                   'build_finished', 'post_processing_done', 'derivation_store_path',
                   'closure_size', 'output_size', 'build_server']
@@ -36,4 +36,4 @@ class BuildinfoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildInfo
         fields = ['id', 'build_server',
-                  'build_id', 'job', 'build_finished']
+                  'build', 'job', 'build_finished']

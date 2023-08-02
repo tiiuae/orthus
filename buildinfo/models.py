@@ -21,7 +21,7 @@ class BuildInfo(models.Model):
     project = models.CharField(max_length=255, null=True, blank=True)
     jobset = models.CharField(max_length=255, null=True, blank=True)
     job = models.CharField(max_length=255, null=True, blank=True)
-    build_id = models.IntegerField()
+    build = models.IntegerField()
     system = models.CharField(max_length=255, null=True, blank=True)
     nix_name = models.CharField(max_length=255, null=True, blank=True)
     queued_at = models.DateTimeField(null=True, blank=True)
@@ -35,10 +35,10 @@ class BuildInfo(models.Model):
     output_size = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return f'{self.build_server.name}-{self.build_id}'
+        return f'{self.build_server.name}-{self.build}'
 
     class Meta:
-        ordering = ['build_server__name', 'build_id']
+        ordering = ['build_server__name', 'build']
 
 
 class OutputStorePath(models.Model):
@@ -54,7 +54,7 @@ class OutputStorePath(models.Model):
 
 
 def files_directory(instance, filename):
-    return f"{instance.buildinfo.build_server.name}/{instance.buildinfo.build_id}/{filename}"
+    return f"{instance.buildinfo.build_server.name}/{instance.buildinfo.build}/{filename}"
 
 
 class Downloadable(models.Model):
